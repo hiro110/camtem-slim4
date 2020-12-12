@@ -29,7 +29,8 @@ $capsule->bootEloquent();
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         'view' => function(ContainerInterface $c){
-            $twig = Twig::create(__DIR__ . '/../templates');
+            // $twig = Twig::create(__DIR__ . '/../templates');
+            $twig = Twig::create(__DIR__ . '/../src/templates');
             $env = $twig->getEnvironment();
             $env->addGlobal('session', $_SESSION);
             $env->addGlobal('URL_TOP', $_ENV['URL_TOP']);
