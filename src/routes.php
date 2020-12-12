@@ -12,8 +12,8 @@ use Psr\Container\ContainerInterface;
 $app->get('/', FormController::class.":getIndex");
 // ユーザサイト
 $app->get("/form/{uri}[/]", FormController::class.":getForm")->add(new CheckedUriMiddleware());
-$app->map(["GET","POST"], "/form/{uri}/confirm[/]", FormController::class.":postConfirm")->add(new CheckedUriMiddleware());
-$app->map(["GET","POST"], "/form/{uri}/complete[/]", FormController::class.":postComplete")->add(new CheckedUriMiddleware());
+$app->post("/form/{uri}/confirm[/]", FormController::class.":postConfirm")->add(new CheckedUriMiddleware());
+$app->post( "/form/{uri}/complete[/]", FormController::class.":postComplete")->add(new CheckedUriMiddleware());
 
 // 管理サイト
 $app->get("/admin[/]", AuthController::class.":getIndex")->add(new LoggedInCheckMiddleware($container));
