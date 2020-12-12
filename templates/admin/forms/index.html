@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+{% block title %}Forms List{% endblock %}
+{% block content %}
+
+<div style="width: 1200px; margin:0 auto; padding: 10px;">
+    <div class="table-container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>uri</th>
+                <th>edit</th>
+                <th>entries</th>
+                <th>delete</th>
+            </thead>
+            <tbody>
+            {% for form in forms %}
+            <tr>
+                <td>{{ form.id }}</td>
+                <td>{{ form.name }}</td>
+                <td>{{ form.base_uri }}</td>
+                <td><a class="button is-info" href="/admin/forms/{{ form.id }}" alt="edit">編集</a></td>
+                <td><a class="button is-success" href="/admin/forms/{{ form.id }}/items" alt="edit">登録状況</a></td>
+                <td><button class="button is-danger modal-button" data-target="modal" aria-haspopup="true" href="" alt="edit">削除</button></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="field is-grouped">
+        {% if session.user.role == 0 %}
+        <a class="button is-link" href="/admin/forms/add" alt="logout">新規作成</a>
+        {% endif %}
+        <div class="mx-2"></div>
+        <a class="button is-link" href="/admin" alt="logout">戻る</a>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <!-- Any other Bulma elements you want -->
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+</div>
+{% endblock %}
