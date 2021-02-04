@@ -94,12 +94,13 @@ CREATE TABLE `submit_values` (
 /*
   * 操作ログ
 */
-CREATE TABLE `actions` (
+CREATE TABLE `audit_logs` (
   `id` int AUTO_INCREMENT,
-  `user` varchar(255) NOT NULL DEFAULT '',
+  `user_id` int(11) DEFAULT NULL,
+  `remote_addr` varchar(255) NOT NULL DEFAULT '',
   `method` varchar(255) NOT NULL DEFAULT '',
   `uri` varchar(255) NOT NULL DEFAULT '',
-  `action` varchar(255) NOT NULL DEFAULT '',
+--   `action` varchar(255) NOT NULL DEFAULT '',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),

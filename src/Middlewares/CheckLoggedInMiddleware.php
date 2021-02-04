@@ -8,8 +8,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Container\ContainerInterface;
 
 use App\Models\User;
+use App\Models\AuditLog;
 
-class LoggedInCheckMiddleware implements MiddlewareInterface
+class CheckLoggedInMiddleware implements MiddlewareInterface
 {
     private $container;
 
@@ -30,6 +31,13 @@ class LoggedInCheckMiddleware implements MiddlewareInterface
                         ->first();
 
         if($user){
+            $audit_log = AuditLog::create([
+                    'user_id' => intVal($user->id),
+                    'remote_addr' => $_SERVER['REMOTE_ADDR'],
+                    'method' => $_SERVER['REQUEST_METHOD'],
+                    'uri' => $_SERVER['REQUEST_URI'],
+                ]);
+
             $response = $handler->handle($request);
         } else {
             $response = $handler->handle($request);
